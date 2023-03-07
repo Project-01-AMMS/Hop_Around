@@ -39,11 +39,50 @@ function getCity(city) {
             for (var j = 0; j < 5; j++) {
                 if (barData.length !== 0) {
                     var randomIndex = Math.floor(Math.random() * barData.length);
-                    var indexNum = barData[0][j]
+                    var indexNum = barData[0][j];
                     var bar = indexNum;
                     displayData.push(bar);
                     console.log(bar.name);
+
+                    //Creates the variables from the API data
+                    var barName = bar.name;
+                    var barAddress = bar.street;
+                    var barCity = bar.city;
+                    var barState = bar.state;
+                    var barZip = bar.postal_code;
+                    var barPhone = bar.phone;
+                    var barWebsite = bar.website_url;
+                   
+                    //Creates the elements that will hold the data
+                    var barDiv = document.createElement("div");
+                    var barNameText = document.createElement("p");
+                    var barAddressText = document.createElement("p");
+                    var barCityStateZipText = document.createElement("p");
+                    var barPhoneText = document.createElement("p");
+                    var barWebsiteText = document.createElement("a");
+
+                    //Adds text values to the data elements
+                    barNameText.textContent = barName;
+                    barAddressText.textContent = barAddress;
+                    barCityStateZipText.textContent = barCity + ", " + barState + " " + barZip;
+                    barPhoneText.textContent = barPhone;
+                    barWebsiteText.textContent = barWebsite;
+                    
+                    //Appends the brewery data to the bar div elements, and then the main container 
+                    barDiv.setAttribute("id", "bar" + j);
+                    document.getElementById("breweries").appendChild(barDiv);
+                    barDiv.appendChild(barNameText);
+                    barDiv.appendChild(barAddressText);
+                    barDiv.appendChild(barCityStateZipText);
+                    barDiv.appendChild(barPhoneText);
+                    barDiv.appendChild(barWebsiteText);
+                    barWebsiteText.setAttribute("href", barWebsite);
+
+
                 } else {
+                    sorryNoBars = document.createElement("p");
+                    sorryNoBars.textContent = "Sorry there are no bars in your area.";
+                    document.getElementById("breweries").appendChild(sorryNoBars);
                     console.log("Sorry there are no bars in your area");
                 }
             }
@@ -56,15 +95,47 @@ function getCity(city) {
         })
         .then(function (data) {
             console.log(data.events.length);
-            for (var i = 0; i < data.events.length; i++) {
+            for (var i = 0; i < 5; i++) {
                 // Appending the data event elements to the eventsList array
                 eventsList.push(data.events[i]);
+                console.log(eventsList);
+
+                //Creates the variables from the API Data
+                var eventImageUrl = data.events[i].performers[0].image;
+                var eventTitle = data.events[i].title;
+                var eventLocation = data.events[i].venue.name;
+                var eventURL = data.events[i].url;
+
+                //Creares the elements that will hold the data
+                var eventDiv = document.createElement("div");
+                var eventImage = document.createElement("img");
+                var eventTitleText = document.createElement("p");
+                var eventLocationText = document.createElement("p");
+                var eventUrlText = document.createElement("a");
+                
+                //Add the values to the event data elemnts
+                eventImage.setAttribute("src", eventImageUrl);
+                eventUrlText.setAttribute("href", eventURL);
+                eventTitleText.textContent = eventTitle;
+                eventLocationText.textContent = eventLocation;
+                eventUrlText.textContent = "Click for Ticket Info";
+    
+                //Appends the events data to the events div elements, and then the main container
+                eventDiv.setAttribute("id", "event" + i);
+                document.getElementById("events").appendChild(eventDiv);
+                eventDiv.appendChild(eventImage);
+                eventDiv.appendChild(eventTitleText);
+                eventDiv.appendChild(eventLocationText);
+                eventDiv.appendChild(eventUrlText);
+
             }
-            var filteredEvents = eventsList.filter((value, index, self) => 
-                index === self.findIndex((v) => v.title === value.title)
-            );
-            console.log("data",filteredEvents);
-            console.log(data);
+
+            // var filteredEvents = eventsList.filter((value, index, self) => 
+            //     index === self.findIndex((v) => v.title === value.title)
+            // );
+
+            // console.log("data",filteredEvents);
+
         })
 
     // Calling the displayDataOnPage function so that all results are filterd and displayed
@@ -99,6 +170,7 @@ btn.addEventListener("click", function () {
     if (input.value !== "") {
         // Calls the function with the the input given when user clicks submit
         getCity(input.value);
+        
     } else {
         console.log("Please enter a valid city")
     }
