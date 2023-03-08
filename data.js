@@ -36,7 +36,7 @@ function getCity(city) {
 
             // This loop gets 5 random beers
             console.log("Bar picks");
-            for (var j = 0; j < 5; j++) {
+            for (var j = 0; j < barData.length; j++) {
                 if (barData.length !== 0) {
                     var randomIndex = Math.floor(Math.random() * barData.length);
                     var indexNum = barData[0][j];
@@ -69,7 +69,7 @@ function getCity(city) {
                     barWebsiteText.textContent = barWebsite;
                     
                     //Appends the brewery data to the bar div elements, and then the main container 
-                    barDiv.setAttribute("id", "bar" + j);
+                    barDiv.setAttribute("class", "bar");
                     document.getElementById("breweries").appendChild(barDiv);
                     barDiv.appendChild(barNameText);
                     barDiv.appendChild(barAddressText);
@@ -95,7 +95,7 @@ function getCity(city) {
         })
         .then(function (data) {
             console.log(data.events.length);
-            for (var i = 0; i < 5; i++) {
+            for (var i = 0; i < data.events.length; i++) {
                 // Appending the data event elements to the eventsList array
                 eventsList.push(data.events[i]);
                 console.log(eventsList);
@@ -121,7 +121,7 @@ function getCity(city) {
                 eventUrlText.textContent = "Click for Ticket Info";
     
                 //Appends the events data to the events div elements, and then the main container
-                eventDiv.setAttribute("id", "event" + i);
+                eventDiv.setAttribute("class", "event");
                 document.getElementById("events").appendChild(eventDiv);
                 eventDiv.appendChild(eventImage);
                 eventDiv.appendChild(eventTitleText);
@@ -146,6 +146,8 @@ function getCity(city) {
 
 // This will filter the elements in the displayData array so that there are no duplicates
 function displayDataOnPage() {
+    document.querySelectorAll(".bar").forEach(barBox => barBox.remove());
+    document.querySelectorAll(".event").forEach(eventBox => eventBox.remove());
     var displayOnPage = displayData.filter((value, index) => {
         return displayData.indexOf(value) === index;
     });
