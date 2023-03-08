@@ -5,15 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <title>Data</title>
 </head>
 <body>
     <input type="text" id="inputID">
     <button id="submit">Submit</button>
     <ul id="bars">
-
     </ul>
+
+    
+    <container id="main-columns">
+        
+        <container class="column">
+            <h1 class="title">Breweries</h1>
+            <container id="breweries">
+            </container>
+        </container>
+        
+        <container class="column">
+            <h1 class="title">Events</h1>
+            <container id="events">
+            </container>
+        </container>
+    
+    </container>
+
     <script src="data.js"></script>
 </body>
 </html>
