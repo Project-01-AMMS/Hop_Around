@@ -1,3 +1,12 @@
+body {
+    margin: 0;
+}
+
+header {
+    border: 1px solid;
+    padding: 100px;
+}
+
 .search {
     width: 800px;
     display: flex;
@@ -9,15 +18,36 @@
 #inputID {
     height: 45px;
     width: 650px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
 #submit {
     height: 51px;
     width: 150px;
+    color: white;
+    font-size: 18px;
+    /* border-color: #33cc33; */
+    border-left: none;
+    background-color: #33cc33;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 1px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#submit:hover {
+    cursor: pointer;
+}
+
+#inputID:focus {
+    outline: none;
 }
 
 input[type="text"] {
     font-size: 25px;
+    border-right: none;
+    padding-left: 10px;
 }
 
 #main-columns {
@@ -29,15 +59,19 @@ input[type="text"] {
     width: 45%;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0 30px #bfbfbf;
+    border-radius: 15px;
+    box-shadow: 0 0 30px #ccc;
+    background-color: #e6e6e6;
+    margin-bottom: 100px;
+    padding-bottom: 10px;
 }
 
 .title {
-    background-color: orange;
+    background-color: #e6e6e6;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     margin-bottom: 0;
-    padding: 20px;
+    padding: 5px;
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
 }
@@ -47,7 +81,7 @@ input[type="text"] {
     left: 0;
     position: absolute;
     width: 100%;
-    background-color: orange;
+    background-color: #e6e6e6;
 }
 
 #breweries, #events {
@@ -57,34 +91,34 @@ input[type="text"] {
     align-items: center;
     width: 100%;
     height: 700px;
-    overflow-y: scroll;
-    background-color: orange;
+    overflow: auto;
+    background-color: #e6e6e6;
     border-bottom-right-radius: 15px;
     border-bottom-left-radius: 15px;
+}
+
+.bar {
+    padding: 30px !important;
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
 }
 
 .bar, .event {
     width: 80%;
     background-color: lightblue;
     margin-top: 10px;
-    padding: 10px;
+    height: 375px;
+    padding: 0px;
     text-align: center;
     border-radius: 15px;
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
 }
 
-/* #events div {
-    width: 80%;
-    background-color: lightblue;
-    margin-top: 10px;
-    padding: 10px;
-    text-align: center;
-    border-radius: 15px;
-    font-family: Arial, Helvetica, sans-serif;
-} */
-
 #events img {
-    width: 100px;
-    height: 75px;
-    border-radius: 50%;
+    width: 100%;
+    height: 50%;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    margin-bottom: 20px;
 }

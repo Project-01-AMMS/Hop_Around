@@ -52,7 +52,7 @@ async function getCity(city) {
             barNameText.textContent = barName;
             barAddressText.textContent = barAddress;
             barCityStateZipText.textContent = barCity + ", " + barState + " " + barZip;
-            barPhoneText.textContent = barPhone;
+            barPhoneText.textContent = formatPhoneNumber(barPhone);
             barWebsiteText.textContent = barWebsite;
                     
             //Appends the brewery data to the bar div elements, and then the main container 
@@ -137,6 +137,16 @@ function displayDataOnPage() {
     //console.log(displayData1);
     //console.log("display",displayOnPage);
 }
+
+// Formatting brewery phone number to be easily readable
+function formatPhoneNumber(phoneNumberString) {
+    var cleaned = ('' + phoneNumberString).replace(/\D/g, '');
+    var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+    if (match) {
+      return '(' + match[1] + ') ' + match[2] + '-' + match[3];
+    }
+    return null;
+} 
 
 
 btn.addEventListener("click", function () {
