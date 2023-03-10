@@ -44,7 +44,7 @@ async function getCity(city) {
       // Changed this
       barCityStateZipText.textContent = barCity + ", " + barState;
       barPhoneText.textContent = formatPhoneNumber(barPhone);
-      barWebsiteText.textContent = "Bar Website";
+      barWebsiteText.textContent = "Website";
 
       // Added this ===========
       if (barWebsite === "" || barWebsite === null) {
@@ -52,7 +52,11 @@ async function getCity(city) {
       }
 
       //Appends the brewery data to the bar div elements, and then the main container
-      barDiv.setAttribute("class", "bar");
+
+      //commented out and replaced with tailwind below
+      // barDiv.setAttribute("class", "bar");
+
+      barDiv.setAttribute("class", "rounded-lg shadow-lg text-center m-2 p-3");
       document.getElementById("breweries").appendChild(barDiv);
       barDiv.appendChild(barNameText);
       barDiv.appendChild(barAddressText);
@@ -60,7 +64,7 @@ async function getCity(city) {
       barDiv.appendChild(barPhoneText);
       barDiv.appendChild(barWebsiteText);
       barWebsiteText.setAttribute("href", barWebsite);
-      barWebsiteText.setAttribute("class", "website");
+      barWebsiteText.setAttribute("class", "p-1 hover:bg-slate-200");
     }
   } else {
     sorryNoBars = document.createElement("p");
@@ -97,15 +101,21 @@ async function getCity(city) {
       var eventUrlText = document.createElement("a");
 
       //Add the values to the event data elemnts
+      eventImage.setAttribute("class", "rounded-md");
       eventImage.setAttribute("src", eventImageUrl);
       eventUrlText.setAttribute("href", eventURL);
+      eventUrlText.setAttribute("class", "p-1 hover:bg-slate-200");
       eventTitleText.textContent = eventTitle;
       eventDateText.textContent = formattedDate;
       eventLocationText.textContent = eventLocation;
       eventUrlText.textContent = "Click for Ticket Info";
 
       //Appends the events data to the events div elements, and then the main container
-      eventDiv.setAttribute("class", "event");
+
+      //commented out and replaced with tailwind below
+      // eventDiv.setAttribute("class", "event");
+
+      eventDiv.setAttribute("class", "flex-col flex items center text-center rounded-lg shadow-xl  m-2 p-3");
       document.getElementById("events").appendChild(eventDiv);
       eventDiv.appendChild(eventImage);
       eventDiv.appendChild(eventTitleText);
