@@ -167,16 +167,37 @@ function displayDataOnPage() {
 
 console.log("Bar Data: ", barData);
 
-btn.addEventListener("click", function () {
-    // function will only be called if the user has entered a city
-    if (input.value !== "") {
-        // Calls the function with the the input given when user clicks submit
-        getCity(input.value);
-        
-    } else {
-        console.log("Please enter a valid city")
-    }
+btn.addEventListener("click", function (event) {
+  event.preventDefault();
+  document.getElementById("events").innerHTML = "";
+  document.getElementById("breweries").innerHTML = "";
+  // Removes boxes from screen
+  document.querySelectorAll(".bar").forEach((barBox) => barBox.remove());
+  document.querySelectorAll(".event").forEach((eventBox) => eventBox.remove());
+  // function will only be called if the user has entered a city
+  if (input.value !== "") {
+    // Calls the function with the the input given when user clicks submit
+    getCity(input.value);
+  } else {
+    console.log("Please enter a valid city");
+  }
+});
 
-})
 
-
+// Scrolls to the desired place on the page
+navLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    var targetId = link.getAttribute("href");
+    var targetSection = document.querySelector(targetId);
+    // Offsetting the bottom section that holds the content due to the header and nav being stuck in place
+    var targetOffsetTop = targetSection.offsetTop;
+    var bottomOffsetTop = bottomSection.offsetTop;
+    var adjustedOffsetTop = targetOffsetTop - bottomOffsetTop;
+    window.scrollTo({
+      top: adjustedOffsetTop,
+      behavior: "smooth",
+    });
+    navLinks.forEach((link) => link.classList.remove("active"));
+    link.classList.add("active");
+  });
+});
