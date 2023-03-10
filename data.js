@@ -131,7 +131,8 @@ function formatPhoneNumber(phoneNumberString) {
   return "Phone Number Not Found";
 }
 
-btn.addEventListener("click", function () {
+btn.addEventListener("click", function (event) {
+  event.preventDefault();
   document.getElementById("events").innerHTML = "";
   document.getElementById("breweries").innerHTML = "";
   // Removes boxes from screen

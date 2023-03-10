@@ -148,10 +148,10 @@ input[type="text"] {
     font-size: 16px;
     box-shadow: 0 0 10px 5px #ccc;
 }
-/* 
+
 .event {
     width: 360px !important;
-} */
+}
 
 .website {
     border: 1px solid black;
@@ -163,9 +163,9 @@ input[type="text"] {
     text-decoration: none;
 }
 
-/* .event {
+.event {
     padding-bottom: 100px !important;
-} */
+}
 
 #events img {
     width: 100%;

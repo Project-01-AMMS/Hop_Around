@@ -10,6 +10,9 @@ Deployed app on Github Pages: https://project-01-amms.github.io/pregame-party/
 
 Repository: https://github.com/Project-01-AMMS/pregame-party
 
+Presentation Slideshow: https://docs.google.com/presentation/d/e/2PACX-1vRugcAtj_2p9ulTy3YrbJ-OlI6WaS0aNejCUNghtS8w90h7Zh3LbfKGQY-Cn_Mzc097lF-bY4kJ9-6Q/pub?start=false&loop=false&delayms=3000
+
+
 ## Image/Gif of Page
 
 ## Authors
