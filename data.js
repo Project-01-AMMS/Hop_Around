@@ -131,7 +131,8 @@ function formatPhoneNumber(phoneNumberString) {
   return "Phone Number Not Found";
 }
 
-btn.addEventListener("click", function () {
+btn.addEventListener("click", function (event) {
+  event.preventDefault();
   document.getElementById("events").innerHTML = "";
   document.getElementById("breweries").innerHTML = "";
   // Removes boxes from screen
@@ -151,8 +152,7 @@ var navLinks = document.querySelectorAll(".nav-link");
 
 // Scrolls to the desired place on the page
 navLinks.forEach((link) => {
-  link.addEventListener("click", (event) => {
-    event.preventDefault();
+  link.addEventListener("click", () => {
     var targetId = link.getAttribute("href");
     var targetSection = document.querySelector(targetId);
     // Offsetting the bottom section that holds the content due to the header and nav being stuck in place
