@@ -152,7 +152,8 @@ var navLinks = document.querySelectorAll(".nav-link");
 
 // Scrolls to the desired place on the page
 navLinks.forEach((link) => {
-  link.addEventListener("click", () => {
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
     var targetId = link.getAttribute("href");
     var targetSection = document.querySelector(targetId);
     // Offsetting the bottom section that holds the content due to the header and nav being stuck in place
