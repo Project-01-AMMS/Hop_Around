@@ -41,14 +41,6 @@ async function getCity(city) {
       //Adds text values to the data elements
       barNameText.textContent = barName;
 
-      // Added this ==========
-      console.log(barAddress);
-      if (barAddress === "" || barAddress === null) {
-        barAddressText.textContent = "N/A";
-      } else {
-        barAddressText.textContent = barAddress;
-      }
-
       // Changed this
       barCityStateZipText.textContent = barCity + ", " + barState;
       barPhoneText.textContent = formatPhoneNumber(barPhone);
@@ -56,10 +48,7 @@ async function getCity(city) {
 
       // Added this ===========
       if (barWebsite === "" || barWebsite === null) {
-        barWebsiteText.style.backgroundColor = "grey";
-        barWebsiteText.style.cursor = "not-allowed";
-        barWebsiteText.style.borderColor = "grey";
-        barWebsiteText.textContent = "Bar Website";
+        barWebsiteText.style.visibility = "hidden";
       }
 
       //Appends the brewery data to the bar div elements, and then the main container
@@ -142,8 +131,7 @@ function formatPhoneNumber(phoneNumberString) {
   return "Phone Number Not Found";
 }
 
-btn.addEventListener("click", function (event) {
-  event.preventDefault();
+btn.addEventListener("click", function () {
   document.getElementById("events").innerHTML = "";
   document.getElementById("breweries").innerHTML = "";
   // Removes boxes from screen
