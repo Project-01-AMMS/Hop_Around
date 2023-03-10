@@ -8,7 +8,7 @@ Pregame and Party is a website that allows a user to search for a city and recei
 
 Deployed app on Github Pages: https://project-01-amms.github.io/pregame-party/
 
-Repository: https://github.com/Project-01-AMMS
+Repository: https://github.com/Project-01-AMMS/pregame-party
 
 ## Image/Gif of Page
 
