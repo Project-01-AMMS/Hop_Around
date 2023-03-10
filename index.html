@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles.css">
-    <title>PREGAME & PARTY</title>
+    <title>Data</title>
 </head>
 <body>
     <!--Wrap search div in a <header> element-->
     <header>
         <form class="search">
-            <input type="text" id="inputID" placeholder="Enter City...">
+            <input type="text" id="inputID" autocomplete="off" placeholder="Enter City...">
             <button id="submit">Submit</button>
         </form>
     </header>
     <nav>
         <ul>
-            <li><a href="#breweries" class="nav-link">Breweries</a></li>
+            <li><a href="#breweries" class="nav-link" id="first">Breweries</a></li>
             <li><a href="#events" class="nav-link">Events</a></li>
             <li><a href="#" class="nav-link">Favorites</a></li>
         </ul>
@@ -29,16 +29,17 @@
     
     <container id="main-columns" class="bottom-section">
         
-        <h1 class="text-4xl text-left ml-6 mt-3 tracking-wider">BREWERIES</h1>
         <container class="column">
-            <container class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4" id="breweries">
-            </container>
+            <h2 class="title text-4xl text-left ml-10 mt-3 tracking-wider" id="brewTitle">BREWERIES <span id="brewLength"></span></h2>
+            <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4" id="breweries">
+
+            </section>
         </container>
         
-        <h1 class="text-4xl text-left ml-6 mt-3 tracking-wider">LOCAL EVENTS</h1>
         <container class="column">
-            <container class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4" id="events">
-            </container>
+            <h2 class="title text-4xl text-left ml-10 mt-3 tracking-wider" id="eventTitle">LOCAL EVENTS <span id="eventLength"></span></h2>
+            <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4" id="events">
+            </section>
         </container>
     
     </container>
