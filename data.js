@@ -1,28 +1,41 @@
 var input = document.getElementById("inputID");
 var btn = document.getElementById("submit");
 var bars = document.getElementById("bars");
+
 var divTitle = document.getElementById("eventTitle");
 var brewTitle = document.getElementById("brewTitle");
 var innerEvents = document.querySelector(".eventInner");
+
 var bottomSection = document.querySelector(".bottom-section");
 var navLinks = document.querySelectorAll(".nav-link");
 var links = document.querySelectorAll('nav a');
+
 var favorites = document.getElementById("favorites");
+
 var sgAPIKEY = "MzIxNzgxMjl8MTY3Nzg4MDY0MS4yODM0NzQ3";
+
 var globalBarData = [];
 var globalEventData = [];
+
 var savedDivs = JSON.parse(localStorage.getItem("card")) || [];
+
 divTitle.style.display = "none";
+
 brewTitle.style.display = "none";
+
 async function getCity(city) {
     console.clear(); // Clears the console everytime the function is called
+
     // Fetching the openBreweryDB API
     var brewAPI = `https://api.openbrewerydb.org/breweries?by_city=${city}`;
+
     // Calling the openBreweryAPI
     var barResponse = await fetch(brewAPI);
     var barData = await barResponse.json();
     var bar = barData;
+
     globalBarData.push(barData);
+    
     // Took if statement out of the for loop and put the loop inside the conditional
     if (barData.length !== 0) {
         for (var j = 0; j < barData.length; j++) {
@@ -31,9 +44,9 @@ async function getCity(city) {
             var barAddress = bar[j].street;
             var barCity = bar[j].city;
             var barState = bar[j].state;
-            var barZip = bar[j].postal_code;
             var barPhone = bar[j].phone;
             var barWebsite = bar[j].website_url;
+
             //Creates the elements that will hold the data
             var barDiv = document.createElement("div");
             var favBtn = document.createElement("button");
@@ -43,45 +56,50 @@ async function getCity(city) {
             var barCityStateZipText = document.createElement("p");
             var barPhoneText = document.createElement("p");
             var barWebsiteText = document.createElement("a");
+
             //Adds text values to the data elements
             barNameText.textContent = cutString(barName);
-            // Added this ==========
-            console.log(barAddress);
+
             if (barAddress === "" || barAddress === null) {
                 barAddressText.textContent = "N/A";
             } else {
                 barAddressText.textContent = barAddress;
             }
-            // Changed this
+
             barCityStateZipText.textContent = barCity + ", " + barState;
             barPhoneText.textContent = formatPhoneNumber(barPhone);
             barWebsiteText.textContent = "Bar Website";
-            // Added this ===========
+
             if (barWebsite === "" || barWebsite === null) {
                 barWebsiteText.style.opacity = .3;
                 barWebsiteText.style.cursor = "not-allowed";
                 barWebsiteText.style.borderColor = "grey";
                 barWebsiteText.textContent = "Bar Website";
             }
+
             //Appends the brewery data to the bar div elements, and then the main container 
             barDiv.setAttribute("class", "barDiv rounded-lg bar shadow-lg text-center m-2 p-3");
             document.getElementById("breweries").appendChild(barDiv);
+
             favIcon.setAttribute("class", "fav fa-sharp fa-solid fa-star");
             favBtn.setAttribute('id', "favBtn" + [j]);
             barDiv.appendChild(favBtn);
             favBtn.appendChild(favIcon);
-            favBtn.addEventListener("click", function(event) { 
+
+            favBtn.addEventListener("click", function (event) {
                 const cardElement = event.target.closest(".barDiv");
                 favorites.appendChild(cardElement);
                 var savedDiv = cardElement.outerHTML;
                 savedDivs.push(savedDiv)
                 localStorage.setItem("card", JSON.stringify(savedDivs));
             });
+
             barDiv.appendChild(barNameText);
             barDiv.appendChild(barAddressText);
             barDiv.appendChild(barCityStateZipText);
             barDiv.appendChild(barPhoneText);
             barDiv.appendChild(barWebsiteText);
+
             barWebsiteText.setAttribute("href", barWebsite);
             barWebsiteText.setAttribute("target", "_blank");
             barWebsiteText.setAttribute("class", "website hover:bg-zinc-700");
@@ -91,10 +109,13 @@ async function getCity(city) {
         sorryNoBars.textContent = "Sorry there are no breweries in your area.";
         document.getElementById("breweries").appendChild(sorryNoBars);
     }
+
     // Fetching the seatgeekAPI
     var eventResponse = await fetch(`https://api.seatgeek.com/2/events?venue.city=${input.value}&client_id=${sgAPIKEY}`);
     var eventData = await eventResponse.json();
+
     globalEventData.push(eventData.events);
+
     if (eventData.events.length !== 0) {
         for (var i = 0; i < eventData.events.length; i++) {
             //Creates the variables from the API Data
@@ -105,14 +126,15 @@ async function getCity(city) {
             var eventURL = eventData.events[i].url;
             var date = dayjs(eventDate);
             var formattedDate = date.format('MM/D h:mm A');
+
             //Creares the elements that will hold the data
-            var eventLabel = document.createElement("h2");
             var eventDiv = document.createElement("div");
             var eventImage = document.createElement("img");
             var eventTitleText = document.createElement("p");
             var eventDateText = document.createElement("p");
             var eventLocationText = document.createElement("p");
             var eventUrlText = document.createElement("a");
+
             //Add the values to the event data elemnts
             eventImage.setAttribute("src", eventImageUrl);
             eventUrlText.setAttribute("href", eventURL);
@@ -120,6 +142,7 @@ async function getCity(city) {
             eventDateText.textContent = formattedDate;
             eventLocationText.textContent = eventLocation;
             eventUrlText.textContent = "Click for Ticket Info";
+
             //Appends the events data to the events div elements, and then the main container
             eventDiv.setAttribute("class", "flex-col event flex items center text-center pb-10 rounded-lg shadow-xl");
             document.getElementById("events").appendChild(eventDiv);
@@ -136,6 +159,7 @@ async function getCity(city) {
         console.log(sorryNoEvents);
     }
 }
+
 // Formatting brewery phone number to be easily readable
 function formatPhoneNumber(phoneNumberString) {
     var cleaned = ('' + phoneNumberString).replace(/\D/g, '');
@@ -145,25 +169,29 @@ function formatPhoneNumber(phoneNumberString) {
     }
     return "Phone Number Not Found";
 }
+
 function getAmount() {
     document.getElementById("brewLength").innerHTML = "(" + globalBarData[0].length + " Items)";
     document.getElementById("eventLength").innerHTML = "(" + globalEventData[0].length + " Items)";
 }
+
 function cutString(str) {
     if (str.length > 13) {
-      str = str.slice(0, 35) + '...';
+        str = str.slice(0, 35) + '...';
     }
     return str;
 }
+
 function loadFavorites() {
     // Reversing array so that the 4 most recent saved breweries are displayed to the page
     savedDivs.reverse();
-    for (var i = 0; i < 4; i++){
+    for (var i = 0; i < 4; i++) {
         var newDiv = document.createElement("div");
         newDiv.innerHTML = savedDivs[i];
         favorites.appendChild(newDiv);
     }
 }
+
 btn.addEventListener("click", function (event) {
     event.preventDefault();
     globalBarData = [];
@@ -175,7 +203,7 @@ btn.addEventListener("click", function (event) {
     document.querySelectorAll(".event").forEach(eventBox => eventBox.remove());
     // function will only be called if the user has entered a city
     if (input.value !== "") {
-        divTitle.style.display= "flex";
+        divTitle.style.display = "flex";
         brewTitle.style.display = "flex";
         // Calls the function with the the input given when user clicks submit
         getCity(input.value);
@@ -188,6 +216,7 @@ btn.addEventListener("click", function (event) {
         console.log("Please enter a valid city")
     }
 })
+
 // Scrolls to the desired place on the page
 navLinks.forEach(link => {
     link.addEventListener('click', (event) => {
@@ -202,16 +231,17 @@ navLinks.forEach(link => {
             top: adjustedOffsetTop,
             behavior: 'smooth'
         });
-       // Update the active link after a short delay
-       setTimeout(() => {
-        // Remove the "active" class from all links
-        const links = document.querySelectorAll('nav a');
-        links.forEach(link => link.classList.remove('active'));
-        // Add the "active" class to the matching link
-        link.classList.add('active');
-    }, 700); // Adjust the delay time as needed
+        // Update the active link after a short delay
+        setTimeout(() => {
+            // Remove the "active" class from all links
+            const links = document.querySelectorAll('nav a');
+            links.forEach(link => link.classList.remove('active'));
+            // Add the "active" class to the matching link
+            link.classList.add('active');
+        }, 700); // Adjust the delay time as needed
     });
 });
+
 window.addEventListener('scroll', () => {
     // Get the current scroll position of the window
     const scrollPosition = window.scrollY;
@@ -238,4 +268,5 @@ window.addEventListener('scroll', () => {
         }
     });
 });
+
 loadFavorites();
