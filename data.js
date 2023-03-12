@@ -4,6 +4,7 @@ var bars = document.getElementById("bars");
 
 var divTitle = document.getElementById("eventTitle");
 var brewTitle = document.getElementById("brewTitle");
+var favTitle = document.getElementById("favTitle");
 var innerEvents = document.querySelector(".eventInner");
 
 var bottomSection = document.querySelector(".bottom-section");
@@ -184,6 +185,8 @@ function cutString(str) {
 
 function loadFavorites() {
     // Reversing array so that the 4 most recent saved breweries are displayed to the page
+
+
     savedDivs.reverse();
     for (var i = 0; i < 4; i++) {
         var newDiv = document.createElement("div");
