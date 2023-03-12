@@ -189,7 +189,8 @@ function cutString(str) {
 console.log(localStorage);
 
 function loadFavorites() {
-    // Reversing array so that the 4 most recent saved breweries are displayed to the page
+    //On page load, page will be blank IF nothing is in local storage.
+    //Else, the "Favorite Breweries" heading will be visible, along with the favorite brewery cards
     if (localStorage.length === 0) {
         favorites.setAttribute("display", "none");
     } else {
