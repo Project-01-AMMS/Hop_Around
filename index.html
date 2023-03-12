@@ -6,43 +6,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/5e86550e56.js" crossorigin="anonymous"></script>
     <title>Data</title>
 </head>
 <body>
     <!--Wrap search div in a <header> element-->
-    <header>
-        <form class="search">
-            <input type="text" id="inputID" autocomplete="off" placeholder="Enter City...">
-            <button id="submit">Submit</button>
-        </form>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="#breweries" class="nav-link" id="first">Breweries</a></li>
-            <li><a href="#events" class="nav-link">Events</a></li>
-            <li><a href="#" class="nav-link">Favorites</a></li>
+        <header>
+            <form class="search">
+                <input type="text" id="inputID" autocomplete="off" placeholder="Enter City...">
+                <button id="submit">Submit</button>
+            </form>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="#breweries" class="nav-link" id="first">Breweries</a></li>
+                <li><a href="#events" class="nav-link">Events</a></li>
+                <li><a href="#favorites" class="nav-link">Favorites</a></li>
+            </ul>
+        </nav>
+        <ul id="bars">
         </ul>
-    </nav>
-    <ul id="bars">
-    </ul>
-
-    
-    <container id="main-columns" class="bottom-section">
         
-        <container class="column">
-            <h2 class="title text-4xl text-left ml-10 mt-3 tracking-wider" id="brewTitle">BREWERIES <span id="brewLength"></span></h2>
-            <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4" id="breweries">
-
-            </section>
-        </container>
+        <container id="main-columns" class="bottom-section">
+            
+            <container class="column">
+                <h2 class="title text-4xl text-left ml-10 mt-3 tracking-wider" id="brewTitle">BREWERIES <span id="brewLength"></span></h2>
+                <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4" id="breweries">
+                </section>
+            </container>
+            
+            <container class="column">
+                <h2 class="title text-4xl text-left ml-10 mt-3 tracking-wider" id="eventTitle">LOCAL EVENTS <span id="eventLength"></span></h2>
+                <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4" id="events">
+                </section>
+            </container>
+            <container class="column">
+                <h2 class="title text-4xl text-left ml-10 mt-3 tracking-wider" id="eventTitle">FAVORITE BREWERIES<span id="eventLength"></span></h2>
+                <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4" id="favorites">
+                </section>
+            </container>
         
-        <container class="column">
-            <h2 class="title text-4xl text-left ml-10 mt-3 tracking-wider" id="eventTitle">LOCAL EVENTS <span id="eventLength"></span></h2>
-            <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4" id="events">
-            </section>
         </container>
-    
-    </container>
 
     <script
       src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
