@@ -24,6 +24,8 @@ divTitle.style.display = "none";
 
 brewTitle.style.display = "none";
 
+favTitle.style.display = "none";
+
 async function getCity(city) {
     console.clear(); // Clears the console everytime the function is called
 
@@ -88,6 +90,7 @@ async function getCity(city) {
             favBtn.appendChild(favIcon);
 
             favBtn.addEventListener("click", function (event) {
+                favTitle.style.display = "flex";
                 const cardElement = event.target.closest(".barDiv");
                 favorites.appendChild(cardElement);
                 var savedDiv = cardElement.outerHTML;
@@ -183,16 +186,20 @@ function cutString(str) {
     return str;
 }
 
+console.log(localStorage);
+
 function loadFavorites() {
     // Reversing array so that the 4 most recent saved breweries are displayed to the page
-
-
-    savedDivs.reverse();
-    for (var i = 0; i < 4; i++) {
+    if (localStorage.length === 0) {
+        favorites.setAttribute("display", "none");
+    } else {
+        savedDivs.reverse();
+        favTitle.style.display = "flex";
+    for (var i = 0; i < savedDivs.length; i++) {
         var newDiv = document.createElement("div");
         newDiv.innerHTML = savedDivs[i];
         favorites.appendChild(newDiv);
-    }
+    }}
 }
 
 btn.addEventListener("click", function (event) {
