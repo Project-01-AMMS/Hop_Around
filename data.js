@@ -5,6 +5,7 @@ var bars = document.getElementById("bars");
 var divTitle = document.getElementById("eventTitle");
 var brewTitle = document.getElementById("brewTitle");
 var favTitle = document.getElementById("favTitle");
+var favEventTitle = document.getElementById("favEventTitle");
 var innerEvents = document.querySelector(".eventInner");
 
 var bottomSection = document.querySelector(".bottom-section");
@@ -12,19 +13,23 @@ var navLinks = document.querySelectorAll(".nav-link");
 var links = document.querySelectorAll('nav a');
 
 var favorites = document.getElementById("favorites");
+var favoriteEvents = document.getElementById("favorite-Events");
 
 var sgAPIKEY = "MzIxNzgxMjl8MTY3Nzg4MDY0MS4yODM0NzQ3";
 
 var globalBarData = [];
 var globalEventData = [];
 
-var savedDivs = JSON.parse(localStorage.getItem("card")) || [];
+var savedBrewDivs = JSON.parse(localStorage.getItem("card")) || [];
+var savedEventDivs = JSON.parse(localStorage.getItem("eventCard")) || [];
 
 divTitle.style.display = "none";
 
 brewTitle.style.display = "none";
 
 favTitle.style.display = "none";
+
+favEventTitle.style.display = "none";
 
 async function getCity(city) {
     console.clear(); // Clears the console everytime the function is called
@@ -91,11 +96,11 @@ async function getCity(city) {
 
             favBtn.addEventListener("click", function (event) {
                 favTitle.style.display = "flex";
-                const cardElement = event.target.closest(".barDiv");
-                favorites.appendChild(cardElement);
-                var savedDiv = cardElement.outerHTML;
-                savedDivs.push(savedDiv)
-                localStorage.setItem("card", JSON.stringify(savedDivs));
+                const brewCardElement = event.target.closest(".barDiv");
+                favorites.appendChild(brewCardElement);
+                var savedBrewDiv = brewCardElement.outerHTML;
+                savedBrewDivs.push(savedBrewDiv)
+                localStorage.setItem("card", JSON.stringify(savedBrewDivs));
             });
 
             barDiv.appendChild(barNameText);
@@ -138,6 +143,8 @@ async function getCity(city) {
             var eventDateText = document.createElement("p");
             var eventLocationText = document.createElement("p");
             var eventUrlText = document.createElement("a");
+            var favBtn2 = document.createElement("button");
+            var favIcon2 = document.createElement("i");
 
             //Add the values to the event data elemnts
             eventImage.setAttribute("src", eventImageUrl);
@@ -148,13 +155,28 @@ async function getCity(city) {
             eventUrlText.textContent = "Click for Ticket Info";
 
             //Appends the events data to the events div elements, and then the main container
-            eventDiv.setAttribute("class", "flex-col event flex items center text-center pb-10 rounded-lg shadow-xl");
+            eventDiv.setAttribute("class", "eventDiv flex-col event flex items center text-center pb-10 rounded-lg shadow-xl");
             document.getElementById("events").appendChild(eventDiv);
             eventDiv.appendChild(eventImage);
             eventDiv.appendChild(eventTitleText);
             eventDiv.appendChild(eventDateText);
             eventDiv.appendChild(eventLocationText);
             eventDiv.appendChild(eventUrlText);
+
+            favIcon2.setAttribute("class", "fav2 fa-sharp fa-solid fa-star");
+            favBtn2.setAttribute('id', "favBtn2" + [i]);
+            eventDiv.appendChild(favBtn2);
+            favBtn2.appendChild(favIcon2);
+
+            
+            favBtn2.addEventListener("click", function (event) {
+                favEventTitle.style.display = "flex";
+                const eventCardElement = event.target.closest(".eventDiv");
+                favoriteEvents.appendChild(eventCardElement);
+                var savedEventDiv = eventCardElement.outerHTML;
+                savedEventDivs.push(savedEventDiv);
+                localStorage.setItem("eventCard", JSON.stringify(savedEventDivs));
+            });
         }
     } else {
         sorryNoEvents = document.createElement("p");
@@ -188,18 +210,33 @@ function cutString(str) {
 
 console.log(localStorage);
 
-function loadFavorites() {
+function loadFavoriteBrews() {
     //On page load, page will be blank IF nothing is in local storage.
     //Else, the "Favorite Breweries" heading will be visible, along with the favorite brewery cards
     if (localStorage.length === 0) {
         favorites.setAttribute("display", "none");
     } else {
-        savedDivs.reverse();
+        savedBrewDivs.reverse();
         favTitle.style.display = "flex";
-    for (var i = 0; i < savedDivs.length; i++) {
+    for (var i = 0; i < savedBrewDivs.length; i++) {
         var newDiv = document.createElement("div");
-        newDiv.innerHTML = savedDivs[i];
+        newDiv.innerHTML = savedBrewDivs[i];
         favorites.appendChild(newDiv);
+    }}
+}
+
+function loadFavoriteEvents() {
+    //On page load, page will be blank IF nothing is in local storage.
+    //Else, the "Favorite Breweries" heading will be visible, along with the favorite brewery cards
+    if (localStorage.length === 0) {
+        favoriteEvents.setAttribute("display", "none");
+    } else {
+        savedEventDivs.reverse();
+        favEventTitle.style.display = "flex";
+    for (var i = 0; i < savedEventDivs.length; i++) {
+        var newEventDiv = document.createElement("div");
+        newEventDiv.innerHTML = savedEventDivs[i];
+        favoriteEvents.appendChild(newEventDiv);
     }}
 }
 
@@ -220,7 +257,7 @@ btn.addEventListener("click", function (event) {
         getCity(input.value);
         setTimeout(function () {
             getAmount();
-            loadFavorites();
+            loadFavoriteBrews();
             input.value = "";
         }, 500)
     } else {
@@ -280,4 +317,5 @@ window.addEventListener('scroll', () => {
     });
 });
 
-loadFavorites();
+loadFavoriteBrews();
+loadFavoriteEvents();
