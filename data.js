@@ -258,6 +258,7 @@ btn.addEventListener("click", function (event) {
         setTimeout(function () {
             getAmount();
             loadFavoriteBrews();
+            loadFavoriteEvents();
             input.value = "";
         }, 500)
     } else {
