@@ -15,6 +15,8 @@ https://docs.google.com/presentation/d/e/2PACX-1vRugcAtj_2p9ulTy3YrbJ-OlI6WaS0aN
 
 ## Image/Gif of Page
 
+![Hop Around webpage](Untitled_ Mar 14, 2023 3_45 PM.gif)
+
 ## Authors
 
 This project was built for the Northwestern Coding Bootcamp. Project developed by:
