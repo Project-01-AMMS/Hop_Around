@@ -20,10 +20,10 @@ https://docs.google.com/presentation/d/e/2PACX-1vRugcAtj_2p9ulTy3YrbJ-OlI6WaS0aN
 ## Authors
 
 This project was built for the Northwestern Coding Bootcamp. Project developed by:
-Martin Lynch
-Matt Wagner
-Anthony Groce
-Sebastian Aguirre
+- Martin Lynch
+- Matt Wagner
+- Anthony Groce
+- Sebastian Aguirre
 
 ## Features
 
@@ -66,6 +66,8 @@ The developers of this app owe thanks to several free, open-source services.
 - Cursor.cc - for our beer cursor - https://www.cursor.cc/
 
 - Font Awesome - for our star icons - https://fontawesome.com/
+
+- Clip Art Max - for our beer hop logo - https://www.clipartmax.com/
 
 Gratitude is also given to the NU Coding Bootcamp and our advisor Pat Cocoran.
 
