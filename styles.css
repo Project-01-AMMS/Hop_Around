@@ -207,6 +207,13 @@ input[type="text"] {
 cursor: url(cursor.cur), auto;
 }
 
+@media screen and (max-width: 1440px) {
+    #favorites {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media screen and (max-width: 767px) {
     nav a {
         font-size: 15px;
@@ -238,6 +245,11 @@ cursor: url(cursor.cur), auto;
         border-top-left-radius: 10px;
         border-bottom-left-radius: 10px;
         border: none;
+    }
+
+    #favorites {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
     }
 
     #submit {
