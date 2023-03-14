@@ -1,11 +1,11 @@
+
 var input = document.getElementById("inputID");
 var btn = document.getElementById("submit");
 var bars = document.getElementById("bars");
 
 var divTitle = document.getElementById("eventTitle");
 var brewTitle = document.getElementById("brewTitle");
-var favTitle = document.getElementById("favTitle");
-var favEventTitle = document.getElementById("favEventTitle");
+
 var innerEvents = document.querySelector(".eventInner");
 
 var bottomSection = document.querySelector(".bottom-section");
@@ -16,20 +16,13 @@ var favorites = document.getElementById("favorites");
 var favoriteEvents = document.getElementById("favorite-Events");
 
 var sgAPIKEY = "MzIxNzgxMjl8MTY3Nzg4MDY0MS4yODM0NzQ3";
-
 var globalBarData = [];
 var globalEventData = [];
-
-var savedBrewDivs = JSON.parse(localStorage.getItem("card")) || [];
+var savedDivs = JSON.parse(localStorage.getItem("card")) || [];
 var savedEventDivs = JSON.parse(localStorage.getItem("eventCard")) || [];
 
 divTitle.style.display = "none";
-
 brewTitle.style.display = "none";
-
-favTitle.style.display = "none";
-
-favEventTitle.style.display = "none";
 
 async function getCity(city) {
     console.clear(); // Clears the console everytime the function is called
@@ -40,25 +33,29 @@ async function getCity(city) {
     // Calling the openBreweryAPI
     var barResponse = await fetch(brewAPI);
     var barData = await barResponse.json();
-    var bar = barData;
 
+    var bar = barData;
     globalBarData.push(barData);
-    
+
     // Took if statement out of the for loop and put the loop inside the conditional
     if (barData.length !== 0) {
         for (var j = 0; j < barData.length; j++) {
+
             //Creates the variables from the API data
             var barName = bar[j].name;
             var barAddress = bar[j].street;
             var barCity = bar[j].city;
             var barState = bar[j].state;
+            var barZip = bar[j].postal_code;
             var barPhone = bar[j].phone;
             var barWebsite = bar[j].website_url;
 
             //Creates the elements that will hold the data
             var barDiv = document.createElement("div");
+
             var favBtn = document.createElement("button");
             var favIcon = document.createElement("i");
+
             var barNameText = document.createElement("p");
             var barAddressText = document.createElement("p");
             var barCityStateZipText = document.createElement("p");
@@ -68,16 +65,20 @@ async function getCity(city) {
             //Adds text values to the data elements
             barNameText.textContent = cutString(barName);
 
+            // Added this ==========
+            console.log(barAddress);
             if (barAddress === "" || barAddress === null) {
                 barAddressText.textContent = "N/A";
             } else {
                 barAddressText.textContent = barAddress;
             }
 
+            // Changed this
             barCityStateZipText.textContent = barCity + ", " + barState;
             barPhoneText.textContent = formatPhoneNumber(barPhone);
             barWebsiteText.textContent = "Bar Website";
 
+            // Added this ===========
             if (barWebsite === "" || barWebsite === null) {
                 barWebsiteText.style.opacity = .3;
                 barWebsiteText.style.cursor = "not-allowed";
@@ -94,13 +95,12 @@ async function getCity(city) {
             barDiv.appendChild(favBtn);
             favBtn.appendChild(favIcon);
 
-            favBtn.addEventListener("click", function (event) {
-                favTitle.style.display = "flex";
-                const brewCardElement = event.target.closest(".barDiv");
-                favorites.appendChild(brewCardElement);
-                var savedBrewDiv = brewCardElement.outerHTML;
-                savedBrewDivs.push(savedBrewDiv)
-                localStorage.setItem("card", JSON.stringify(savedBrewDivs));
+            favBtn.addEventListener("click", function(event) { 
+                const cardElement = event.target.closest(".barDiv");
+                favorites.appendChild(cardElement);
+                var savedDiv = cardElement.outerHTML;
+                savedDivs.push(savedDiv)
+                localStorage.setItem("card", JSON.stringify(savedDivs));
             });
 
             barDiv.appendChild(barNameText);
@@ -108,7 +108,6 @@ async function getCity(city) {
             barDiv.appendChild(barCityStateZipText);
             barDiv.appendChild(barPhoneText);
             barDiv.appendChild(barWebsiteText);
-
             barWebsiteText.setAttribute("href", barWebsite);
             barWebsiteText.setAttribute("target", "_blank");
             barWebsiteText.setAttribute("class", "website hover:bg-zinc-700");
@@ -185,7 +184,6 @@ async function getCity(city) {
         console.log(sorryNoEvents);
     }
 }
-
 // Formatting brewery phone number to be easily readable
 function formatPhoneNumber(phoneNumberString) {
     var cleaned = ('' + phoneNumberString).replace(/\D/g, '');
@@ -197,32 +195,38 @@ function formatPhoneNumber(phoneNumberString) {
 }
 
 function getAmount() {
+
     document.getElementById("brewLength").innerHTML = "(" + globalBarData[0].length + " Items)";
+
     document.getElementById("eventLength").innerHTML = "(" + globalEventData[0].length + " Items)";
+
 }
 
 function cutString(str) {
     if (str.length > 13) {
-        str = str.slice(0, 35) + '...';
+      str = str.slice(0, 35) + '...';
     }
     return str;
 }
 
-console.log(localStorage);
+function loadFavorites() {
+    // Reversing array so that the 4 most recent saved breweries are displayed to the page
+    savedDivs.reverse();
+    if (savedDivs.length >= 4){
+        for (var i = 0; i < 4; i++){
+            var newDiv = document.createElement("div");
+            newDiv.innerHTML = savedDivs[i];
+            favorites.appendChild(newDiv);
+        }
+    }
 
-function loadFavoriteBrews() {
-    //On page load, page will be blank IF nothing is in local storage.
-    //Else, the "Favorite Breweries" heading will be visible, along with the favorite brewery cards
-    if (localStorage.length === 0) {
-        favorites.setAttribute("display", "none");
-    } else {
-        savedBrewDivs.reverse();
-        favTitle.style.display = "flex";
-    for (var i = 0; i < savedBrewDivs.length; i++) {
-        var newDiv = document.createElement("div");
-        newDiv.innerHTML = savedBrewDivs[i];
-        favorites.appendChild(newDiv);
-    }}
+    if(savedDivs.length < 4) {
+        for (var i = 0; i < savedDivs.length; i++){
+            var newDiv = document.createElement("div");
+            newDiv.innerHTML = savedDivs[i];
+            favorites.appendChild(newDiv);
+        }
+    }
 }
 
 function loadFavoriteEvents() {
@@ -233,7 +237,7 @@ function loadFavoriteEvents() {
     } else {
         savedEventDivs.reverse();
         favEventTitle.style.display = "flex";
-    for (var i = 0; i < savedEventDivs.length; i++) {
+    for (var i = 0; i < savedEventDivs.length -1; i++) {
         var newEventDiv = document.createElement("div");
         newEventDiv.innerHTML = savedEventDivs[i];
         favoriteEvents.appendChild(newEventDiv);
@@ -251,13 +255,14 @@ btn.addEventListener("click", function (event) {
     document.querySelectorAll(".event").forEach(eventBox => eventBox.remove());
     // function will only be called if the user has entered a city
     if (input.value !== "") {
-        divTitle.style.display = "flex";
+        divTitle.style.display= "flex";
         brewTitle.style.display = "flex";
         // Calls the function with the the input given when user clicks submit
         getCity(input.value);
         setTimeout(function () {
             getAmount();
-            loadFavoriteBrews();
+            loadFavorites();
+            loadFavoriteEvents();
             input.value = "";
         }, 500)
     } else {
@@ -279,14 +284,14 @@ navLinks.forEach(link => {
             top: adjustedOffsetTop,
             behavior: 'smooth'
         });
-        // Update the active link after a short delay
-        setTimeout(() => {
-            // Remove the "active" class from all links
-            const links = document.querySelectorAll('nav a');
-            links.forEach(link => link.classList.remove('active'));
-            // Add the "active" class to the matching link
-            link.classList.add('active');
-        }, 700); // Adjust the delay time as needed
+       // Update the active link after a short delay
+       setTimeout(() => {
+        // Remove the "active" class from all links
+        const links = document.querySelectorAll('nav a');
+        links.forEach(link => link.classList.remove('active'));
+        // Add the "active" class to the matching link
+        link.classList.add('active');
+    }, 700); // Adjust the delay time as needed
     });
 });
 
@@ -317,5 +322,5 @@ window.addEventListener('scroll', () => {
     });
 });
 
-loadFavoriteBrews();
+loadFavorites();
 loadFavoriteEvents();
