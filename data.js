@@ -192,26 +192,36 @@ function cutString(str) {
     return str;
 }
 
-function loadFavorites() {
-    // Reversing array so that the 4 most recent saved breweries are displayed to the page
-    savedDivs.reverse();
-    if (savedDivs.length >= 4){
-        for (var i = 0; i < 4; i++){
-            var newDiv = document.createElement("div");
-            newDiv.innerHTML = savedDivs[i];
-            newDiv.setAttribute("class", "flex-col event flex items center text-center");
-            favorites.appendChild(newDiv);
-        }
-    }
+console.log(localStorage);
 
-    if(savedDivs.length < 4) {
-        for (var i = 0; i < savedDivs.length; i++){
-            var newDiv = document.createElement("div");
-            newDiv.setAttribute("class", "text-center");
-            newDiv.innerHTML = savedDivs[i];
-            favorites.appendChild(newDiv);
-        }
-    }
+function loadFavoriteBrews() {
+    //On page load, page will be blank IF nothing is in local storage.
+    //Else, the "Favorite Breweries" heading will be visible, along with the favorite brewery cards
+    if (localStorage.length === 0) {
+        favorites.setAttribute("display", "none");
+    } else {
+        savedBrewDivs.reverse();
+        favTitle.style.display = "flex";
+    for (var i = 0; i < savedBrewDivs.length; i++) {
+        var newDiv = document.createElement("div");
+        newDiv.innerHTML = savedBrewDivs[i];
+        favorites.appendChild(newDiv);
+    }}
+}
+
+function loadFavoriteEvents() {
+    //On page load, page will be blank IF nothing is in local storage.
+    //Else, the "Favorite Breweries" heading will be visible, along with the favorite brewery cards
+    if (localStorage.length === 0) {
+        favoriteEvents.setAttribute("display", "none");
+    } else {
+        savedEventDivs.reverse();
+        favEventTitle.style.display = "flex";
+    for (var i = 0; i < savedEventDivs.length; i++) {
+        var newEventDiv = document.createElement("div");
+        newEventDiv.innerHTML = savedEventDivs[i];
+        favoriteEvents.appendChild(newEventDiv);
+    }}
 }
 
 btn.addEventListener("click", function (event) {
