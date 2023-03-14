@@ -65,7 +65,6 @@ async function getCity(city) {
             //Adds text values to the data elements
             barNameText.textContent = cutString(barName);
 
-            // Added this ==========
             console.log(barAddress);
             if (barAddress === "" || barAddress === null) {
                 barAddressText.textContent = "N/A";
@@ -73,12 +72,10 @@ async function getCity(city) {
                 barAddressText.textContent = barAddress;
             }
 
-            // Changed this
             barCityStateZipText.textContent = barCity + ", " + barState;
             barPhoneText.textContent = formatPhoneNumber(barPhone);
             barWebsiteText.textContent = "Bar Website";
 
-            // Added this ===========
             if (barWebsite === "" || barWebsite === null) {
                 barWebsiteText.style.opacity = .3;
                 barWebsiteText.style.cursor = "not-allowed";
