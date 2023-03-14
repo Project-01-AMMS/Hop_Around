@@ -237,7 +237,7 @@ function loadFavoriteEvents() {
     } else {
         savedEventDivs.reverse();
         favEventTitle.style.display = "flex";
-    for (var i = 0; i < savedEventDivs.length -1; i++) {
+    for (var i = 0; i < savedEventDivs.length; i++) {
         var newEventDiv = document.createElement("div");
         newEventDiv.innerHTML = savedEventDivs[i];
         favoriteEvents.appendChild(newEventDiv);
