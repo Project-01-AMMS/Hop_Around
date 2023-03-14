@@ -237,11 +237,12 @@ function loadFavoriteEvents() {
     } else {
         savedEventDivs.reverse();
         favEventTitle.style.display = "flex";
-    for (var i = 0; i < savedEventDivs.length; i++) {
-        var newEventDiv = document.createElement("div");
-        newEventDiv.innerHTML = savedEventDivs[i];
-        favoriteEvents.appendChild(newEventDiv);
-    }}
+        for (var i = 0; i < savedEventDivs.length; i++) {
+            var newEventDiv = document.createElement("div");
+            newEventDiv.innerHTML = savedEventDivs[i];
+            favoriteEvents.appendChild(newEventDiv);
+        }
+    }
 }
 
 btn.addEventListener("click", function (event) {
