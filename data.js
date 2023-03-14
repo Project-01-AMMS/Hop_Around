@@ -228,21 +228,16 @@ function loadFavoriteBrews() {
 function loadFavoriteEvents() {
     //On page load, page will be blank IF nothing is in local storage.
     //Else, the "Favorite Breweries" heading will be visible, along with the favorite brewery cards
-    savedDivs.reverse();
-    if (savedDivs.length >= 4){
-        for (var i = 0; i < 4; i++){
-            var newDiv = document.createElement("div");
-            newDiv.innerHTML = savedDivs[i];
-            newDiv.setAttribute("class", "flex-col event flex items center text-center");
-            favorites.appendChild(newDiv);
-        }
+    if (localStorage.length === 0) {
+        favoriteEvents.setAttribute("display", "none");
     } else {
-        for (var i = 0; i < savedDivs.length; i++){
-            var newDiv = document.createElement("div");
-            newDiv.innerHTML = savedDivs[i];
-            favorites.appendChild(newDiv);
-        }
-    }
+        savedEventDivs.reverse();
+        favEventTitle.style.display = "flex";
+    for (var i = 0; i < savedEventDivs.length; i++) {
+        var newEventDiv = document.createElement("div");
+        newEventDiv.innerHTML = savedEventDivs[i];
+        favoriteEvents.appendChild(newEventDiv);
+    }}
 }
 
 btn.addEventListener("click", function (event) {
