@@ -224,6 +224,10 @@ input[type="text"] {
     padding: 0;
 }
 
+.cursor {
+    cursor: url(cursor.cur), auto;
+}
+
 @media screen and (max-width: 1440px) {
     #favorites {
         display: grid;
