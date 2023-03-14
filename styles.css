@@ -12,10 +12,15 @@ header {
     z-index: 1;
     background-color: white;
 }
+.img {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
 
 nav {
     position: sticky;
-    top: 152px;
+    top: 341px;
     max-width: 100vw;
     border-bottom: 3px solid;
     text-align: center;
