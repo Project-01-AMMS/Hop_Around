@@ -13,9 +13,9 @@ Repository: https://github.com/Project-01-AMMS/Hop_Around
 Presentation Slideshow:
 https://docs.google.com/presentation/d/e/2PACX-1vRugcAtj_2p9ulTy3YrbJ-OlI6WaS0aNejCUNghtS8w90h7Zh3LbfKGQY-Cn_Mzc097lF-bY4kJ9-6Q/pub?start=false&loop=false&delayms=3000
 
-## Image/Gif of Page
+## GIF of Hop Around in Use
 
-![Hop Around webpage](Untitled_ Mar 14, 2023 3_45 PM.gif)
+![Hop Around application in use GIF](./assets/Untitled_%20Mar%2014%2C%202023%203_45%20PM.gif)
 
 ## Authors
 
